@@ -19,6 +19,5 @@ Java Application to create secret santa matches
 ## To Do Items
 1. Logging is broken
 2. JUnits are not written
-3. Sending emails by smtp is not yet implemented in EmailNotifier.java
-4. Updating read me with steps to invoke the matcher from the distribution files
+3. Updating read me with steps to invoke the matcher from the distribution files
 
