@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.mail.MessagingException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,10 +33,18 @@ public class Main {
 			secretSantaParticipants.add(new SecretSantaParticipant(participant));
 		}
 		List<SecretSantaParticipantPair> matches = SecretSantaMatcher.match(secretSantaParticipants);
-		Notifier notifier = new EmailNotifier(smtpConfigFileName);
-		for (SecretSantaParticipantPair match : matches) {
-			notifier.notify(match);
+		Notifier notifier;
+		try {
+			notifier = new EmailNotifier(smtpConfigFileName);
+			for (SecretSantaParticipantPair match : matches) {
+				notifier.notify(match);
+			}
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			logger.catching(e);
+			logger.error("Exception Sending Emails");
 		}
+
 	}
 
 	private static String[] readParticipants(String pParticipantsFileLocation) {
