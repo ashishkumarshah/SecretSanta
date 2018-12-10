@@ -21,3 +21,25 @@ Java Application to create secret santa matches
 2. JUnits are not written
 3. Updating read me with steps to invoke the matcher from the distribution files
 
+## Sample contents of participants.properties
+participants=email1@somedomain.com,email2@somedomain2.com,ashish@example.com,dummy@dummy.com
+
+## Sample contents of smtp.properties
+smtpPort=587
+
+smtpHost=smtp.gmail.com
+
+smtpUsername=yourgmailusername@gmail.com
+
+mailText=Your match is %s
+
+smtpPassword=YourPassword
+
+subject=Secret Santa is Here!
+
+
+## Gmail Troubleshooting
+I have multifactor enabled for my google account, and also by default gmail does not let you send mail with your regular login credentials. So i generated an application password from gmail account settings. At the time of writing this document, the app password can be generated from this link https://myaccount.google.com/apppasswords
+
+## Questions?
+Please raise an issue :D Happy to help!
