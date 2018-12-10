@@ -1,54 +1,51 @@
 package com.phodu.secretsanta.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import com.phodu.secretsanta.SecretSantaParticipant;
 import com.phodu.secretsanta.SecretSantaParticipantPair;
-
+/**
+ * Class to Generate Secret Santa Matches
+ * @author ashish
+ *
+ */
 public class SecretSantaMatcher {
 	/**
-	 * 
-	 * @param pParticipants
-	 * @return
+	 * Function to find a secret santa match for the given list of participants
+	 * @param pParticipants The list of secret santa participants
+	 * @return A list of secret santa participant pairs
 	 */
 	public static List<SecretSantaParticipantPair> match(List<SecretSantaParticipant> pParticipants) {
 		List<SecretSantaParticipantPair> matches = new LinkedList<SecretSantaParticipantPair>();
-		List<Integer> matchingIndices = generateMatches(pParticipants.size());
+		//This is the core logic
+		int[] matchingIndices = getShuffledArray(pParticipants.size());
 		for (int i = 0; i < pParticipants.size(); i++) {
-			matches.add(
-					new SecretSantaParticipantPair(pParticipants.get(i), pParticipants.get(matchingIndices.get(i))));
+			matches.add(new SecretSantaParticipantPair(pParticipants.get(i), pParticipants.get(matchingIndices[i])));
 		}
 		return matches;
 	}
 
 	/**
+	 * Function to return an array containing shuffled elements from 0 to pSize -1
 	 * 
-	 * @param pCount
-	 * @return
+	 * @param pSize The size of the shuffled array
+	 * @return The shuffled Array
 	 */
 
-	private static List<Integer> generateMatches(int pCount) {
-		Integer[] array = new Integer[pCount];
-		for (int i = 0; i < pCount; i++) {
-			array[i] = i;
+	private static int[] getShuffledArray(int pSize) {
+		int[] shuffledArray = new int[pSize];
+		for (int i = 0; i < pSize; i++) {
+			shuffledArray[i] = i;
 		}
 		Random random = new Random();
-		// Loop over array.
-		for (int i = 0; i < array.length -1; i++) {
-			// Get a random index of the array past the current index.
-			// ... The argument is an exclusive bound.
-			// It will not go past the array's end.
-			int randomValue = i + random.nextInt(pCount - i);
-			// Swap the random element with the present element.
-			int randomElement = array[randomValue];
-			array[randomValue] = array[i];
-			array[i] = randomElement;
+		for (int i = 0; i < shuffledArray.length - 1; i++) {
+			int randomIndex = i + 1 + random.nextInt(pSize - 1 - i);
+			int randomElement = shuffledArray[randomIndex];
+			shuffledArray[randomIndex] = shuffledArray[i];
+			shuffledArray[i] = randomElement;
 		}
-		return Arrays.asList(array);
+		return shuffledArray;
 	}
 }
