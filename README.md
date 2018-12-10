@@ -7,7 +7,7 @@ Java Application to create secret santa matches
  2. From the root of the project run gradle eclipse
  3. Import the folder in eclipse
 ## Running on command line
-1. Ensure that **participants.properties** is present in the project root
+1. Ensure that **participants.properties** and **smtp.properties** are present in the project root
 2. From the project root, run **gradle run**
 ## How to generate Secret Santa matches
  1. The application needs a list of participants, the comma separated participants lists is expected to be present in a .properties file, under the keyname  **participants**
